@@ -6,9 +6,9 @@ export const PopularFrameworks: React.FC = () => {
     const [state, update] = React.useState<FrameworkSummary | null>(null);
 
     const frameworks: FrameworkSummary[] = [
-        { "name": "React", details: "http://www.mocky.io/v2/5d36894a56000067003a5323" },
-        { "name": "Angular", details: "http://www.mocky.io/v2/5d368a3256000054003a5327" },
-        { "name": "Vue", details: "http://www.mocky.io/v2/5d36899b5600007d5d3a5324" }
+        { "name": "React", details: "http://www.mocky.io/v2/5d36894a56000067003a5323?mocky-delay=3s" },
+        { "name": "Angular", details: "http://www.mocky.io/v2/5d368a3256000054003a5327?mocky-delay=2s" },
+        { "name": "Vue", details: "http://www.mocky.io/v2/5d36899b5600007d5d3a5324?mocky-delay=1s" }
     ];
 
     return <div style={{ display: 'flex' }}>
