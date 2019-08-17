@@ -10,12 +10,26 @@ export const FrameworkDetails: React.FC<FrameworkDetailsProps> = (props: Framewo
       fetch data unnecessarily.
     */
     React.useEffect(() => {
+        const controller = new AbortController();
         update({ loaded: false, description: null });
 
-        fetch(props.details)
+        // we pass in a `signal` to `fetch` so that we can cancel the requests
+        fetch(props.details, { signal: controller.signal })
             .then(response => response.json())
-            .then(json => update({ loaded: true, ...json }));
+            .then(json => update({ loaded: true, ...json }))
+            .catch(e => {
+                if (controller.signal.aborted) {
+                    console.log('Request has been gracefully cancelled');
+                }
+                else {
+                    throw e;
+                }
+            });
 
+        // cancellation callback
+        return function cancel() {
+            controller.abort();
+        };
     }, [props.details]);
 
     return <div style={{ padding: '1rem', margin: '1rem', flex: 1 }}>
